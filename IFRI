@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription au Concours IFRI - Nouveaux Bacheliers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d2d2d;
+        }
+
+        h2 {
+            text-align: center;
+            color: #3a8d56;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="email"], input[type="date"], select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .success {
+            color: green;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .credits {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Concours IFRI 2024</h1>
+        <h2>Concours pour les nouveaux bacheliers de l'Institut de Formation en Informatique (IFRI)</h2>
+        
+        <p>Bienvenue sur la page d'inscription au concours IFRI destiné aux nouveaux bacheliers. Remplissez le formulaire ci-dessous pour participer et tenter votre chance de rejoindre notre institut et commencer une carrière dans le domaine de l'informatique.</p>
+        
+        <form id="inscriptionForm" onsubmit="return validateForm()">
+            
+            <div class="form-group">
+                <label for="name">Nom complet</label>
+                <input type="text" id="name" name="name" placeholder="Votre nom complet" required>
+                <div class="error" id="nameError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Adresse email</label>
+                <input type="email" id="email" name="email" placeholder="Votre adresse email" required>
+                <div class="error" id="emailError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="dob">Date de naissance</label>
+                <input type="date" id="dob" name="dob" required>
+                <div class="error" id="dobError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="diploma">Année du baccalauréat</label>
+                <select id="diploma" name="diploma" required>
+                    <option value="">Choisissez l'année</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                </select>
+                <div class="error" id="diplomaError"></div>
+            </div>
+
+            <button type="submit">S'inscrire au concours</button>
+
+        </form>
+
+        <div class="success" id="successMessage"></div>
+
+    </div>
+
+    <div class="footer">
+        <p>© 2024 IFRI - Institut de Formation et de Recherche en Informatique. Tous droits réservés.</p>
+    </div>
+
+    <div class="credits">
+        <p>Site créé par <strong>ASSIHOU Freddy</strong>, élève en première année à l'Institut IFRI.</p>
+        <p>Pour toute question, contactez-moi au : <strong>44466240</strong></p>
+    </div>
+
+    <script>
+        function validateForm() {
+            let valid = true;
+
+            // Efface les messages d'erreur
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('dobError').textContent = '';
+            document.getElementById('diplomaError').textContent = '';
+            document.getElementById('successMessage').textContent = '';
+
+            // Récupération des valeurs
+            let name = document.getElementById('name').value.trim();
+            let email = document.getElementById('email').value.trim();
+            let dob = document.getElementById('dob').value.trim();
+            let diploma = document.getElementById('diploma').value.trim();
+
+            // Validation du nom
+            if (name === '') {
+                document.getElementById('nameError').textContent = 'Le nom complet est obligatoire.';
+                valid = false;
+            }
+
+            // Validation de l'email
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === '') {
+                document.getElementById('emailError').textContent = 'L\'adresse email est obligatoire.';
+                valid = false;
+            } else if (!emailRegex.test(email)) {
+                document.getElementById('emailError').textContent = 'L\'adresse email n\'est pas valide.';
+                valid = false;
+            }
+
+            // Validation de la date de naissance
+            if (dob === '') {
+                document.getElementById('dobError').textContent = 'La date de naissance est obligatoire.';
+                valid = false;
+            }
+
+            // Validation de l'année du baccalauréat
+            if (diploma === '') {
+                document.getElementById('diplomaError').textContent = 'L\'année du baccalauréat est obligatoire.';
+                valid = false;
+            }
+
+            // Si tout est valide, afficher un message de succès
+            if (valid) {
+                document.getElementById('successMessage').textContent = 'Inscription réussie ! Bonne chance pour le concours IFRI.';
+            }
+
+            return valid;
+        }
+    </script>
+
+</body>
+</html>
